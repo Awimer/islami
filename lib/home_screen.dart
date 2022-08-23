@@ -10,6 +10,9 @@ class HomeScreen extends StatelessWidget{
          'islami'
        ),
      ),
+     body: Column(children: [
+       Text('dsadasd')
+     ],),
    );
   }
 
