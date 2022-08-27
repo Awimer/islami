@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:islami/hadeth_tab.dart';
-import 'package:islami/my_colors.dart';
-import 'package:islami/quran_tab.dart';
-import 'package:islami/radio_tab.dart';
-import 'package:islami/tasbeh_tab.dart';
+import 'package:islami/home/hadeth/hadeth_tab.dart';
+import 'package:islami/home/quran/quran_tab.dart';
+import 'package:islami/home/radio/radio_tab.dart';
+import 'package:islami/home/tasbeh/tasbeh_tab.dart';
 
 class HomeScreen extends StatefulWidget{
   static const String routeName='Home';
@@ -28,18 +27,16 @@ class _HomeScreenState extends State<HomeScreen> {
      ),
        child: Scaffold(
          backgroundColor: Colors.transparent,
-         appBar: AppBar(centerTitle: true,
+         appBar: AppBar(
+           centerTitle: true,
            backgroundColor: Colors.transparent,
            elevation: 0,
-           title: Text('اسلامى',style: TextStyle(
-             color: Colors.black,
-             fontSize: 30,
-             fontWeight: FontWeight.w500,
-           ),),
+           title: Text('Islami'
+           ),
          ),
          bottomNavigationBar: Theme(
            data: Theme.of(context).copyWith(
-             canvasColor: MyColors.primaryColor
+             canvasColor: Theme.of(context).primaryColor,
            ),
            child: BottomNavigationBar(
              currentIndex:selectedIndex,
