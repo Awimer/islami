@@ -13,9 +13,26 @@ class _HadethTabState extends State<HadethTab> {
   Widget build(BuildContext context) {
     if (hadethList.isEmpty)
       readHadethFile();
-    return ListView.builder(itemBuilder: (_,index){
-      return Text(hadethList[index].title);
-    }, itemCount: hadethList.length,);
+    return Column(
+      children: [
+        Image.asset('assets/images/hadeth_header_image.png'),
+        Container(
+          alignment: Alignment.center,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            border: Border.symmetric(horizontal: BorderSide(color: Theme.of(context).primaryColor,width: 2),
+            ),
+          ),
+          child: Text('ElAhadeth',
+          style: Theme.of(context).textTheme.headline4,
+          ),),
+          Expanded(
+            child: ListView.builder(itemBuilder: (_,index){
+              return Text(hadethList[index].title);
+            }, itemCount: hadethList.length,),
+          ),
+      ],
+    );
   }
 
   void readHadethFile()async{
