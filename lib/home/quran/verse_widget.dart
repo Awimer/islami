@@ -8,11 +8,14 @@ class VerseWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(vertical: 6),
+        //alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(vertical: 12,horizontal: 12),
         child: Text('$content {${index+1}}',
-          style: Theme.of(context).textTheme.bodyText1,
-        ));
+          style: Theme.of(context).textTheme.headlineSmall,
+          textDirection: TextDirection.rtl,
+          textAlign: TextAlign.center,
+        )
+    );
   }
 
 }
