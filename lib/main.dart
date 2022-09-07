@@ -5,6 +5,7 @@ import 'package:islami/home/quran/sura_details.dart';
 import 'package:islami/home_screen.dart';
 import 'package:islami/my_theme.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'home/hadeth/hadeth_details.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -17,10 +18,11 @@ void main() {
 
 class MyApp extends StatelessWidget {
 
-  // This widget is the root of your application.
+  late SettingsProvider settingsProvider;
   @override
   Widget build(BuildContext context) {
-    var settingsProvider = Provider.of<SettingsProvider>(context);
+    settingsProvider = Provider.of<SettingsProvider>(context);
+    initSharedPref();
     return MaterialApp(
       theme: MyTheme.lightTheme,
       darkTheme: MyTheme.darkTheme,
@@ -44,5 +46,17 @@ class MyApp extends StatelessWidget {
       ],
       locale: Locale(settingsProvider.currentLang),
     );
+  }
+
+  void initSharedPref()async{
+    final prefs = await SharedPreferences.getInstance();
+    String lang = prefs.getString('language') ?? 'en';
+    settingsProvider.changeLanguage(lang);
+
+    if(prefs.getString('theme') == 'dark'){
+      settingsProvider.changeTheme(ThemeMode.dark);
+    } else{
+      settingsProvider.changeTheme(ThemeMode.light);
+    }
   }
 }
