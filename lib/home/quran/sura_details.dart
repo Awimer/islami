@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami/home/quran/verse_widget.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/settings_provider.dart';
 
 class SuraDetailesScreen extends StatefulWidget{
   static const String routeName = 'sura-details';
@@ -14,13 +17,15 @@ class _SuraDetailesScreenState extends State<SuraDetailesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<SettingsProvider>(context);
     var args = ModalRoute.of(context)?.settings.arguments as SuraDetailsArgs;
     if (verses.isEmpty)
       readFile(args.index);
     return Container(
     decoration: BoxDecoration(
     image: DecorationImage(
-    image: AssetImage('assets/images/background_pattern.png',
+    image: AssetImage(
+      provider.getMainBackGround(),
     ),
     fit: BoxFit.fill,
     ),),
@@ -34,7 +39,7 @@ class _SuraDetailesScreenState extends State<SuraDetailesScreen> {
        :Container(
         margin: EdgeInsets.symmetric(horizontal:12 ,vertical:64 ),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).backgroundColor,
           borderRadius: BorderRadius.circular(24)
         ),
          child: ListView.separated(itemBuilder: (_,index){

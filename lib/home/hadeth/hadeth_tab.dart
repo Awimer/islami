@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:islami/home/hadeth/hadeth_name_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class HadethTab extends StatefulWidget{
   @override
@@ -20,18 +23,29 @@ class _HadethTabState extends State<HadethTab> {
           alignment: Alignment.center,
           width: double.infinity,
           decoration: BoxDecoration(
-            border: Border.symmetric(horizontal: BorderSide(color: Theme.of(context).primaryColor,width: 2),
+            border: Border.symmetric(horizontal: BorderSide(
+                color: Theme.of(context).primaryColor,width: 2),
             ),
           ),
-          child: Text('ElAhadeth',
+          child: Text(AppLocalizations.of(context)!.elahadeth,
           style: Theme.of(context).textTheme.headline4,
           ),),
           Expanded(
-            child: ListView.builder(itemBuilder: (_,index){
-              return Text(hadethList[index].title);
-            }, itemCount: hadethList.length,),
+            child: hadethList.isEmpty?
+                CircularProgressIndicator() :
+              ListView.separated(itemBuilder: (_,index){
+              return HadethNameWidget(hadethList[index]);
+            }, itemCount: hadethList.length,
+            separatorBuilder: (_,index){
+              return Container(
+                margin: EdgeInsets.symmetric(horizontal: 64),
+                color: Theme.of(context).primaryColor,
+                width: double.infinity,
+                height: 2,
+              );
+            },
           ),
-      ],
+          )],
     );
   }
 
